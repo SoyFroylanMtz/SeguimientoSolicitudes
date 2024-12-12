@@ -35,13 +35,12 @@
                         <!-- SelectOneMenu -->
                         <div class="p-col" style="flex: 1;">
                             <div class="field">
-                                <p:selectOneMenu id="hideNoselectionOption" value="#{selectOneMenuView.hideNoSelectOption}"
-                                                 hideNoSelectionOption="#{not empty selectOneMenuView.hideNoSelectOption}" style="width: 100%;">
+                                <!-- Dropdown de usuarios con opciones dinámicas -->
+                                <p:selectOneMenu id="hideNoselectionOption" value="#{aDUusarios.selectedUsuario}" style="width: 100%;">
                                     <p:ajax update="@this" process="@this" />
-                                    <f:selectItem itemLabel="Todo los usuarios" itemValue="#{null}" noSelectionOption="true" />
-                                    <f:selectItem itemLabel="Option1" itemValue="Option1" />
-                                    <f:selectItem itemLabel="Option2" itemValue="Option2" />
-                                    <f:selectItem itemLabel="Option3" itemValue="Option3" />
+                                    <f:selectItem itemLabel="Todos los usuarios" itemValue="#{null}" noSelectionOption="true" />
+                                    <f:selectItems value="#{aDUusarios.usuariosList}" var="usuario" 
+                                                   itemLabel="#{usuario.nombre} #{usuario.apellidoPaterno}" itemValue="#{usuario.IDUsuario}" />
                                 </p:selectOneMenu>
                             </div>
                         </div>
@@ -54,7 +53,7 @@
 
                     <!-- Dialog -->
                     <p:dialog header="INFORMACIÓN DEL CORREO" widgetVar="productDialog" modal="true" showEffect="fade"
-                              hideEffect="fade" resizable="false" focus="none">
+                              hideEffect="fade" resizable="false" focus="none" dynamic="true">
                         <p:outputPanel id="productDetail" style="text-align:center;">
                             <div class="card">
                                 <div class="container" style="display: flex; height: 450px;">
@@ -130,13 +129,26 @@
                                     </div>
 
                                     <div class="panel" style="width: 450px; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: white;">
-                                        <div style="display: flex; align-items: center; justify-content: flex-start; gap: 5px;">
-                                            <p:fileUpload value="#{fileUploadView.file}" mode="simple" skinSimple="true" />
-                                            <p:commandButton value="Submit" ajax="false" action="#{fileUploadView.upload}" styleClass="mt-3 ui-button-outlined block" />
-                                        </div>
-                                        <p:media value="/resources/pdf/oficio1-7.pdf" width="450px" height="400px" style="margin-top: 10px;">
-                                            Your browser can't display pdf, <h:outputLink value="#{request.contextPath}/resources/demo/media/guide.pdf">click</h:outputLink> to download pdf instead.
-                                        </p:media>
+                                        <!-- Formulario para subir archivo -->
+                                        <h:form id="uploadForm" enctype="multipart/form-data">
+                                            <div style="display: flex; align-items: center; justify-content: flex-start; gap: 5px;">
+                                                <!-- Componente para subir el archivo -->
+                                                <p:fileUpload value="#{aDDocument.file}" mode="simple" skinSimple="true"  />
+                                                <!-- Botón para guardar -->
+                                                <p:commandButton value="Ver" ajax="true" action="#{aDDocument.upload}" 
+                                                                 update=":uploadForm:uploadedFilePanel" styleClass="mt-3 ui-button-outlined block" />
+                                            </div>
+
+                                            <!-- Panel para mostrar el archivo subido -->
+
+                                            <h:panelGroup id="uploadedFilePanel" layout="block" style="margin-top: 10px;">
+                                                <iframe src="#{aDDocument.currentUrl}" width="450px" height="400px" frameborder="0">
+                                                    Your browser can't display the PDF.
+                                                    <h:outputLink value="#{aDDocument.currentUrl}" target="_blank">Click here to download the file.</h:outputLink>
+                                                </iframe>
+                                            </h:panelGroup>
+
+                                        </h:form>
                                     </div>
                                 </div>
                             </div>
