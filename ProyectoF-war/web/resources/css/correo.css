@@ -1,0 +1,29 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 11 dic 2024, 15:35:51
+    Author     : soyfroylan
+*/
+
+.menu-title-logo {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 3em; /* Hace la fuente más grande */
+    font-weight: bold; /* Opcional: para enfatizar */
+    color: #333; /* Cambiar el color del texto si es necesario */
+}
+.menu-Image-Logo{
+    width: 100%;
+    display: block; 
+    margin: 0 auto;
+}
+.correo-title{
+    text-align: left;
+    font-size: 2em;
+    border-bottom: none;
+}
+.title-container{
+    padding-bottom: 10px;
+}

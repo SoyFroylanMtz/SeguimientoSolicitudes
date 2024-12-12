@@ -10,6 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="/css/default.css"/>
         <h:outputStylesheet name="/css/cssLayout.css"/>
+        <h:outputStylesheet name="/css/correo.css"/>
         <title>Facelets Template</title>
     </h:head>
 
@@ -18,26 +19,30 @@
         <div id="left">
             <ui:insert name="left">
                 <f:view>
-                    <h:graphicImage library="img" name="asfeoax.png" alt="Mi Imagen" style="width: 100px; height: auto;" />
-                    <h5 class="mt-0">Orientation Left</h5>
-                    <p:tabMenu activeIndex="#{param.i}" style="width:15rem" orientation="left">
-                        <p:menuitem value="Home" outcome="" icon="pi pi-fw pi-home">
-                            <f:param name="i" value="0"/>
-                        </p:menuitem>
-                        <p:menuitem value="Calendar" outcome="" icon="pi pi-fw pi-calendar">
-                            <f:param name="i" value="1"/>
-                        </p:menuitem>
-                        <p:menuitem value="Edit" outcome="" icon="pi pi-fw pi-pencil"
-                                    disabled="true">
-                            <f:param name="i" value="2"/>
-                        </p:menuitem>
-                        <p:menuitem value="Documentation" outcome="" icon="pi pi-fw pi-file">
-                            <f:param name="i" value="3"/>
-                        </p:menuitem>
-                        <p:menuitem value="Settings" outcome="" icon="pi pi-fw pi-cog">
-                            <f:param name="i" value="4"/>
-                        </p:menuitem>
-                    </p:tabMenu>
+                    <h:graphicImage library="img" name="asfeoax.png" alt="Mi Imagen" styleClass="menu-Image-Logo" />
+                    <div class="title-container">
+                        <h1 class="menu-title-logo">ASFE</h1>
+                    </div>
+                    <div class="menu-container">
+                        <p:tabMenu activeIndex="#{param.i}" style="width:100%" orientation="left">
+                            <p:menuitem value="Dashboard" outcome="" icon="pi pi-fw pi-home">
+                                <f:param name="i" value="0"/>
+                            </p:menuitem>
+                            <p:menuitem value="Correos" outcome="" icon="pi pi-fw pi-calendar">
+                                <f:param name="i" value="1"/>
+                            </p:menuitem>
+                            <p:menuitem value="Llamadas" outcome="" icon="pi pi-fw pi-pencil">
+                                <f:param name="i" value="2"/>
+                            </p:menuitem>
+                            <p:menuitem value="Oficios" outcome="" icon="pi pi-fw pi-file">
+                                <f:param name="i" value="3"/>
+                            </p:menuitem>
+                            <p:menuitem value="salir" outcome="" icon="pi pi-fw pi-cog">
+                                <f:param name="i" value="4"/>
+                            </p:menuitem>
+                        </p:tabMenu>
+                    </div>
+
                 </f:view>
             </ui:insert>
         </div>
