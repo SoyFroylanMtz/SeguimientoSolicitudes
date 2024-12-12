@@ -51,112 +51,121 @@
                         </div>
                     </div>
 
-                    <!-- Dialog -->
                     <p:dialog header="INFORMACIÓN DEL CORREO" widgetVar="productDialog" modal="true" showEffect="fade"
                               hideEffect="fade" resizable="false" focus="none" dynamic="true">
                         <p:outputPanel id="productDetail" style="text-align:center;">
-                            <div class="card">
-                                <div class="container" style="display: flex; height: 450px;">
-                                    <div class="panel" style="width: 450px; flex: 1; display: flex; flex-direction: column; align-items: start; justify-content: left; background-color: white;">
+                            <div class="card" style="display: flex; flex-direction: row; gap: 20px; justify-content: center;">
 
-                                        <div class="p-col" style="flex: 1; display: flex; align-items: center; justify-content: center">
+                                <!-- Panel Izquierdo: Inputs y Labels -->
+                                <h:form id="formInputs">
+                                    <div style="width: 400px; height: 75vh; display: flex; flex-direction: column; gap: 20px; background-color: white; padding: 10px;">
+                                        <!-- Fecha Emitida -->
+                                        <div style="display: flex; align-items: center; justify-content: start;">
                                             <i class="pi pi-calendar-plus" style="font-size: 1.3rem; margin-right: 10px;"></i>
-                                            <p:outputLabel for="basic" value="Fecha: " />
-                                            <p:datePicker 
-                                                id="basic" 
-                                                value="#{calendarView.date}" 
-                                                style="margin-left: 10px;" 
-                                                pattern="dd-MM-yyyy" 
-                                                showOnFocus="false" 
-                                                showIcon="true"/>
+                                            <p:outputLabel for="fecha" value="Fecha: " />
+                                            <p:datePicker id="fecha" value="#{aDTicket.fechaEmitida}" style="margin-left: 10px;"
+                                                          pattern="yyyy-MM-dd" showOnFocus="false" showIcon="true">
+                                            </p:datePicker>
                                         </div>
 
-                                        <div class="p-col" style="flex: 1; display: flex; align-items: center; margin-top: 10px; justify-content: center">
+
+                                        <!-- Hora Emitida -->
+                                        <div style="display: flex; align-items: center; justify-content: start;">
                                             <i class="pi pi-clock" style="font-size: 1.3rem; margin-right: 10px;"></i>
-                                            <p:outputLabel for="timeonlyMinMax" value="Hora: " />
-                                            <p:datePicker id="timeonlyMinMax" value="#{calendarView.date15}" timeOnly="true" pattern="HH:mm"
-                                                          mindate="#{calendarView.minTime}" maxdate="#{calendarView.maxTime}" style="margin-left: 17px;"/>
+                                            <p:outputLabel for="time" value="Hora: " />
+                                            <p:datePicker id="time" value="#{aDTicket.horaEmitida}" timeOnly="true" 
+                                                          pattern="HH:mm:ss" mindate="#{calendarView.minTime}" maxdate="#{calendarView.maxTime}" 
+                                                          style="margin-left: 17px;" />
                                         </div>
 
-                                        <div class="p-col" style="flex: 1; display: flex; align-items: center; margin-top: 10px; justify-content: center">
+                                        <!-- Plataforma -->
+                                        <div style="display: flex; align-items: center; justify-content: start;">
                                             <i class="pi pi-globe" style="font-size: 1.3rem; margin-right: 10px;"></i>
-                                            <p:outputLabel for="line" value="Plataforma:" />
-                                            <p:selectOneRadio id="line" value="#{aDPlataformas.selectedPlataforma}" layout="lineDirection" style="margin-left: 30px; width: 270px;">
+                                            <p:outputLabel for="platform" value="Plataforma:" />
+                                            <p:selectOneRadio id="platform" value="#{aDPlataformas.selectedPlataforma}" layout="lineDirection" 
+                                                              style="margin-left: 30px; width: 270px;">
                                                 <f:selectItems value="#{aDPlataformas.plataformasList}" var="plataforma" 
                                                                itemLabel="#{plataforma.nombre}" itemValue="#{plataforma.IDPlataforma}" />
                                             </p:selectOneRadio>
                                         </div>
 
-
-                                        <div class="p-col" style="flex: 1; display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+                                        <!-- Municipio -->
+                                        <div style="display: flex; align-items: center; justify-content: start;">
                                             <i class="pi pi-map-marker" style="font-size: 1.3rem; margin-right: 10px;"></i>
-                                            <p:outputLabel for="municipio" value="Municipio: "/>
-                                            <p:selectOneMenu id="municipio" value="#{aDMunicipios.selectedMunicipio}" style="margin-left: 33px; width: 270px; max-width: 270px;">
+                                            <p:outputLabel for="municipio" value="Municipio: " />
+                                            <p:selectOneMenu id="municipio" value="#{aDMunicipios.selectedMunicipio}" 
+                                                             style="margin-left: 33px; width: 240px; max-width: 240px;">
                                                 <f:selectItem itemLabel="Selecciona un Municipio" itemValue="" />
                                                 <f:selectItems value="#{aDMunicipios.municipiosList}" var="municipio" 
                                                                itemLabel="#{municipio.num} - #{municipio.nombre}" itemValue="#{municipio.IDMunicipio}" />
                                             </p:selectOneMenu>
                                         </div>
 
-                                        <div class="p-col" style="flex: 1; display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+                                        <!-- Correo -->
+                                        <div style="display: flex; align-items: center; justify-content: start; margin-top: 0px;">
                                             <i class="pi pi-envelope" style="font-size: 1.3rem; margin-right: 10px;"></i>
-                                            <p:outputLabel for="correo" value="Correo: "/>
-                                            <p:selectOneMenu id="correo" value="#{aDCorreos.correosList}" style="margin-left: 53px; width: 270px; max-width: 270px;">
-                                                <f:selectItem itemLabel="Selecciona un correo" itemValue=""/>
+                                            <p:outputLabel for="correo" value="Correo: " />
+                                            <p:selectOneMenu id="correo" value="#{aDCorreos.selectedCorreo}" 
+                                                             style="margin-left: 53px; width: 240px; max-width: 240px;">
+                                                <f:selectItem itemLabel="Selecciona un correo" itemValue="" />
                                                 <f:selectItems value="#{aDCorreos.correosList}" var="correo" 
-                                                               itemLabel="#{correo.correo}" itemValue="#{municipio.IDCorreo}" />
-
+                                                               itemLabel="#{correo.correo}" itemValue="#{correo.IDCorreo}" />
                                             </p:selectOneMenu>
                                         </div>
 
-                                        <div class="p-col" style="flex: 1; display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+                                        <!-- Responsable -->
+                                        <div style="display: flex; align-items: center; justify-content: start; margin-top: 0px;">
                                             <i class="pi pi-user" style="font-size: 1.3rem; margin-right: 10px;"></i>
-                                            <p:outputLabel for="responsable" value="Responsable: "/>
-                                            <p:selectOneMenu id="responsable" value="#{aDUusarios.selectedUsuario}" style="margin-left: 10px; width: 270px; max-width: 270px;">
-                                                <f:selectItem itemLabel="Selecciona un usuario" itemValue=""/>
+                                            <p:outputLabel for="responsable" value="Responsable: " />
+                                            <p:selectOneMenu id="responsable" value="#{aDUusarios.selectedUsuario}" 
+                                                             style="margin-left: 10px; width: 240px; max-width: 240px;">
+                                                <f:selectItem itemLabel="Selecciona un usuario" itemValue="" />
                                                 <f:selectItems value="#{aDUusarios.usuariosList}" var="usuario" 
                                                                itemLabel="#{usuario.nombre} #{usuario.apellidoPaterno}" itemValue="#{usuario.IDUsuario}" />
                                             </p:selectOneMenu>
                                         </div>
-                                        <div class="p-col" style="flex: 1; display: flex; align-items: center; justify-content: center; margin-top: 10px;">
-                                            <i class="pi pi-paperclip" style="font-size: 1.3rem; margin-right: 10px;"></i>
-                                            <p:outputLabel for="asunto" value="Asunto:" />
 
-                                        </div>
-                                        <div class="p-col" style="flex: 1; display: flex; align-items: start; margin-top: 0px;">
-                                            <p:inputTextarea id="asunto" rows="6" cols="33" style="width: 410px;" />
-                                        </div>
-                                    </div>
-
-                                    <div class="panel" style="width: 450px; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: white;">
-                                        <!-- Formulario para subir archivo -->
-                                        <h:form id="uploadForm" enctype="multipart/form-data">
-                                            <div style="display: flex; align-items: center; justify-content: flex-start; gap: 5px;">
-                                                <!-- Componente para subir el archivo -->
-                                                <p:fileUpload value="#{aDDocument.file}" mode="simple" skinSimple="true"  />
-                                                <!-- Botón para guardar -->
-                                                <p:commandButton value="Ver" ajax="true" action="#{aDDocument.upload}" 
-                                                                 update=":uploadForm:uploadedFilePanel" styleClass="mt-3 ui-button-outlined block" />
+                                        <!-- Asunto -->
+                                        <div style="display: flex; align-items: center; justify-content: start; flex-direction: column; gap: 5px;">
+                                            <div style="display: flex; align-items: center; width: 100%;">
+                                                <i class="pi pi-paperclip" style="font-size: 1.3rem; margin-right: 10px;"></i>
+                                                <p:outputLabel for="asunto" value="Asunto:" />
                                             </div>
-
-                                            <!-- Panel para mostrar el archivo subido -->
-
-                                            <h:panelGroup id="uploadedFilePanel" layout="block" style="margin-top: 10px;">
-                                                <iframe src="#{aDDocument.currentUrl}" width="450px" height="400px" frameborder="0">
-                                                    Your browser can't display the PDF.
-                                                    <h:outputLink value="#{aDDocument.currentUrl}" target="_blank">Click here to download the file.</h:outputLink>
-                                                </iframe>
-                                            </h:panelGroup>
-
-                                        </h:form>
+                                            <p:inputTextarea id="asunto" rows="6" cols="33" style="width: 100%;" />
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div style="text-align: right; margin-top: 10px;">
-                                <p:button value="Submit" icon="pi pi-check" />
+                                    <!-- Botón para procesar ambos formularios -->
+                                    <div style="position: absolute; bottom: 10px; right: 10px;">
+                                        <p:commandButton value="Guardar Todo" icon="pi pi-save" ajax="true" action="#{aDTicket.guardarTicketParcial}"
+                                                         process="@form" update="@form" style="background-color: #28a745; color: white; border: none; padding: 5px 15px; border-radius: 3px; font-size: 12px; cursor: pointer;" />
+                                    </div>
+
+
+                                </h:form>
+
+                                <!-- Panel Derecho: Subida de Archivo -->
+                                <h:form id="uploadForm" enctype="multipart/form-data">
+                                    <div style="width: 500px; display: flex; flex-direction: column; gap: 10px;">
+                                        <!-- Formulario para subir archivo -->
+                                        <div style="display: flex; align-items: center; justify-content: flex-start; gap: 5px;">
+                                            <p:fileUpload value="#{aDDocument.file}" mode="simple" skinSimple="true"  label="Añadir"/>
+                                            <p:commandButton value="Ver" ajax="true" action="#{aDDocument.upload}" 
+                                                             update="uploadedFilePanel" styleClass="mt-3 ui-button-outlined block" />
+                                        </div>
+
+                                        <!-- Panel para mostrar el archivo subido -->
+                                        <h:panelGroup id="uploadedFilePanel" layout="block" style="margin-top: 10px;">
+                                            <iframe src="#{aDDocument.currentUrl}" width="450px" height="400px" frameborder="0">
+                                                Your browser can't display the PDF.
+                                                <h:outputLink value="#{aDDocument.currentUrl}" target="_blank">Click here to download the file.</h:outputLink>
+                                            </iframe>
+                                        </h:panelGroup>
+                                    </div>
+                                </h:form>
                             </div>
                         </p:outputPanel>
                     </p:dialog>
+
 
                 </div>
 

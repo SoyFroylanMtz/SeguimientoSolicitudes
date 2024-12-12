@@ -17,7 +17,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -51,18 +50,12 @@ public class Tickets implements Serializable {
     @Basic(optional = false)
     @Column(name = "IDTicket")
     private Integer iDTicket;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
+    @Size(max = 30)
     @Column(name = "folioTicket")
     private String folioTicket;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "fechaRecibida")
     @Temporal(TemporalType.DATE)
     private Date fechaRecibida;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "horaRecibida")
     @Temporal(TemporalType.TIME)
     private Date horaRecibida;
@@ -78,46 +71,24 @@ public class Tickets implements Serializable {
     @Column(name = "horaCompletada")
     @Temporal(TemporalType.TIME)
     private Date horaCompletada;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "fechaAsignada")
     @Temporal(TemporalType.DATE)
     private Date fechaAsignada;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "horAsignada")
     @Temporal(TemporalType.TIME)
     private Date horAsignada;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "userID")
-    private int userID;
-    @Basic(optional = false)
-    @NotNull
+    private Integer userID;
     @Column(name = "procesoID")
-    private int procesoID;
-    @Basic(optional = false)
-    @NotNull
+    private Integer procesoID;
     @Column(name = "tipoID")
-    private int tipoID;
+    private Integer tipoID;
 
     public Tickets() {
     }
 
     public Tickets(Integer iDTicket) {
         this.iDTicket = iDTicket;
-    }
-
-    public Tickets(Integer iDTicket, String folioTicket, Date fechaRecibida, Date horaRecibida, Date fechaAsignada, Date horAsignada, int userID, int procesoID, int tipoID) {
-        this.iDTicket = iDTicket;
-        this.folioTicket = folioTicket;
-        this.fechaRecibida = fechaRecibida;
-        this.horaRecibida = horaRecibida;
-        this.fechaAsignada = fechaAsignada;
-        this.horAsignada = horAsignada;
-        this.userID = userID;
-        this.procesoID = procesoID;
-        this.tipoID = tipoID;
     }
 
     public Integer getIDTicket() {
@@ -200,27 +171,27 @@ public class Tickets implements Serializable {
         this.horAsignada = horAsignada;
     }
 
-    public int getUserID() {
+    public Integer getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(Integer userID) {
         this.userID = userID;
     }
 
-    public int getProcesoID() {
+    public Integer getProcesoID() {
         return procesoID;
     }
 
-    public void setProcesoID(int procesoID) {
+    public void setProcesoID(Integer procesoID) {
         this.procesoID = procesoID;
     }
 
-    public int getTipoID() {
+    public Integer getTipoID() {
         return tipoID;
     }
 
-    public void setTipoID(int tipoID) {
+    public void setTipoID(Integer tipoID) {
         this.tipoID = tipoID;
     }
 
