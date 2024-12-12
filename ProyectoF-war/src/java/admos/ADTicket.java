@@ -32,18 +32,18 @@ public class ADTicket implements Serializable {
 
     public void guardarTicketParcial() {
         try {
-            System.out.println("Fecha Emitida: " + fechaEmitida);
-            System.out.println("Hora Emitida: " + horaEmitida);
-            System.out.println("Usuario Seleccionado: " + aDUusarios.getSelectedUsuario());
-
             selectedUser = aDUusarios.getSelectedUsuario();
-            if (fechaEmitida == null || horaEmitida == null || selectedUser == null) {
-                mensaje = "Error: Datos incompletos.";
+
+            // Validar solo los campos obligatorios
+            if (fechaEmitida == null || horaEmitida == null) {
+                mensaje = "Error: Fecha y hora emitidas son obligatorias.";
                 return;
             }
 
-            mDTicket.crearTicketParcial(fechaEmitida, horaEmitida, selectedUser);
-            mensaje = "El ticket se creó correctamente con datos específicos.";
+            // Llamar a crearTicketParcial con el userID opcional
+            mDTicket.crearTicketParcial(fechaEmitida, horaEmitida, selectedUser != 0 ? selectedUser : null);
+
+            mensaje = "El ticket se creó correctamente con los datos proporcionados.";
         } catch (Exception e) {
             mensaje = "Error al crear el ticket: " + e.getMessage();
         }

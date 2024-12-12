@@ -22,8 +22,7 @@ import modeloDatos.Usuarios;
 public class ADUusarios implements Serializable {
 
     private List<Usuarios> usuariosList; // Lista de municipios para el select
-    private Integer selectedUsuario; // ID del municipio seleccionado
-
+    private Integer selectedUsuario= 0;
     @Inject
     private MDUsuarios mdUsuarios; // Inyección del Session Bean
  

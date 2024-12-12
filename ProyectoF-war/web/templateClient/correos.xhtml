@@ -119,7 +119,7 @@
                                             <p:outputLabel for="responsable" value="Responsable: " />
                                             <p:selectOneMenu id="responsable" value="#{aDUusarios.selectedUsuario}" 
                                                              style="margin-left: 10px; width: 240px; max-width: 240px;">
-                                                <f:selectItem itemLabel="Selecciona un usuario" itemValue="" />
+                                                <f:selectItem itemLabel="Selecciona un usuario" itemValue="0" />
                                                 <f:selectItems value="#{aDUusarios.usuariosList}" var="usuario" 
                                                                itemLabel="#{usuario.nombre} #{usuario.apellidoPaterno}" itemValue="#{usuario.IDUsuario}" />
                                             </p:selectOneMenu>

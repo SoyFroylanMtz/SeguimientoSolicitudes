@@ -24,26 +24,21 @@ public class MDTicket {
     private TicketsFacade ticketsFacade;
 
     public void crearTicketParcial(Date fechaEmitida, Date horaEmitida, Integer userID) {
-        // Validaciones para asegurarte de que los datos no sean nulos o inválidos
-        if (fechaEmitida == null || horaEmitida == null) {
-            throw new IllegalArgumentException("La fecha y hora emitida no pueden ser nulas.");
-        }
-        if (userID == null || userID <= 0) {
-            throw new IllegalArgumentException("El ID de usuario no es válido.");
-        }
 
-        // Crear una nueva instancia de Tickets
         Tickets ticket = new Tickets();
         ticket.setFechaEmitida(fechaEmitida);
         ticket.setHoraEmitida(horaEmitida);
         ticket.setUserID(userID);
 
-        // Opcionalmente, puedes configurar otras propiedades predeterminadas
         Date now = new Date();
         ticket.setFechaRecibida(now);
         ticket.setHoraRecibida(now);
 
-        // Persistir el ticket en la base de datos
+        if (userID != null && userID > 0) {
+            ticket.setFechaAsignada(now);
+            ticket.setHorAsignada(now);
+        }
+
         ticketsFacade.create(ticket);
     }
 
