@@ -4,9 +4,11 @@
  */
 package accesoDatos;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import modeloDatos.Correos;
 
 /**
@@ -26,6 +28,18 @@ public class CorreosFacade extends AbstractFacade<Correos> {
 
     public CorreosFacade() {
         super(Correos.class);
+    }
+    
+    public List<Correos> obtenerTodosLosCorreos() {
+        List<Correos> municipios = null;
+        try {
+            Query query = em.createNamedQuery("Correos.findAll");
+            municipios = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace(); // Log del error para depuración
+            return null;
+        }
+        return municipios;
     }
     
 }

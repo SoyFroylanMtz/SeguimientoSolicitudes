@@ -54,67 +54,78 @@
 
                     <!-- Dialog -->
                     <p:dialog header="INFORMACIÓN DEL CORREO" widgetVar="productDialog" modal="true" showEffect="fade"
-                              hideEffect="fade" resizable="false">
+                              hideEffect="fade" resizable="false" focus="none">
                         <p:outputPanel id="productDetail" style="text-align:center;">
                             <div class="card">
                                 <div class="container" style="display: flex; height: 450px;">
                                     <div class="panel" style="width: 450px; flex: 1; display: flex; flex-direction: column; align-items: start; justify-content: left; background-color: white;">
 
-                                        <div class="p-col" style="flex: 1; display: flex; align-items: start;">
+                                        <div class="p-col" style="flex: 1; display: flex; align-items: center; justify-content: center">
+                                            <i class="pi pi-calendar-plus" style="font-size: 1.3rem; margin-right: 10px;"></i>
                                             <p:outputLabel for="basic" value="Fecha: " />
                                             <p:datePicker 
                                                 id="basic" 
                                                 value="#{calendarView.date}" 
                                                 style="margin-left: 10px;" 
-                                                pattern="dd-MM-yyyy" />
+                                                pattern="dd-MM-yyyy" 
+                                                showOnFocus="false" 
+                                                showIcon="true"/>
                                         </div>
 
-                                        <div class="p-col" style="flex: 1; display: flex; align-items: start; margin-top: 10px;">
+                                        <div class="p-col" style="flex: 1; display: flex; align-items: center; margin-top: 10px; justify-content: center">
+                                            <i class="pi pi-clock" style="font-size: 1.3rem; margin-right: 10px;"></i>
                                             <p:outputLabel for="timeonlyMinMax" value="Hora: " />
                                             <p:datePicker id="timeonlyMinMax" value="#{calendarView.date15}" timeOnly="true" pattern="HH:mm"
-                                                          mindate="#{calendarView.minTime}" maxdate="#{calendarView.maxTime}" style="margin-left: 10px;" />
+                                                          mindate="#{calendarView.minTime}" maxdate="#{calendarView.maxTime}" style="margin-left: 17px;"/>
                                         </div>
 
-                                        <div class="p-col" style="flex: 1; display: flex; align-items: start; margin-top: 10px;">
+                                        <div class="p-col" style="flex: 1; display: flex; align-items: center; margin-top: 10px; justify-content: center">
+                                            <i class="pi pi-globe" style="font-size: 1.3rem; margin-right: 10px;"></i>
                                             <p:outputLabel for="line" value="Plataforma:" />
-                                            <p:selectOneRadio id="line" value="#{aDPlataformas.selectedPlataforma}" layout="lineDirection" style="margin-left: 10px;">
+                                            <p:selectOneRadio id="line" value="#{aDPlataformas.selectedPlataforma}" layout="lineDirection" style="margin-left: 30px; width: 270px;">
                                                 <f:selectItems value="#{aDPlataformas.plataformasList}" var="plataforma" 
                                                                itemLabel="#{plataforma.nombre}" itemValue="#{plataforma.IDPlataforma}" />
                                             </p:selectOneRadio>
                                         </div>
 
 
-                                        <div class="p-col" style="flex: 1; display: flex; align-items: start; margin-top: 10px;">
+                                        <div class="p-col" style="flex: 1; display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+                                            <i class="pi pi-map-marker" style="font-size: 1.3rem; margin-right: 10px;"></i>
                                             <p:outputLabel for="municipio" value="Municipio: "/>
-                                            <p:selectOneMenu id="municipio" value="#{aDMunicipios.selectedMunicipio}" style="margin-left: 10px;">
+                                            <p:selectOneMenu id="municipio" value="#{aDMunicipios.selectedMunicipio}" style="margin-left: 33px; width: 270px; max-width: 270px;">
                                                 <f:selectItem itemLabel="Selecciona un Municipio" itemValue="" />
                                                 <f:selectItems value="#{aDMunicipios.municipiosList}" var="municipio" 
                                                                itemLabel="#{municipio.num} - #{municipio.nombre}" itemValue="#{municipio.IDMunicipio}" />
                                             </p:selectOneMenu>
                                         </div>
 
-                                        <div class="p-col" style="flex: 1; display: flex; align-items: start; margin-top: 10px;">
+                                        <div class="p-col" style="flex: 1; display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+                                            <i class="pi pi-envelope" style="font-size: 1.3rem; margin-right: 10px;"></i>
                                             <p:outputLabel for="correo" value="Correo: "/>
-                                            <p:selectOneMenu id="correo" value="#{selectOneMenuView.selectedCorreo}" style="margin-left: 10px;">
+                                            <p:selectOneMenu id="correo" value="#{aDCorreos.correosList}" style="margin-left: 53px; width: 270px; max-width: 270px;">
                                                 <f:selectItem itemLabel="Selecciona un correo" itemValue=""/>
-                                                <f:selectItem itemLabel="Option1" itemValue="Option1"/>
-                                                <f:selectItem itemLabel="Option2" itemValue="Option2"/>
-                                                <f:selectItem itemLabel="Option3" itemValue="Option3"/>
+                                                <f:selectItems value="#{aDCorreos.correosList}" var="correo" 
+                                                               itemLabel="#{correo.correo}" itemValue="#{municipio.IDCorreo}" />
+
                                             </p:selectOneMenu>
                                         </div>
 
-                                        <div class="p-col" style="flex: 1; display: flex; align-items: start; margin-top: 10px;">
+                                        <div class="p-col" style="flex: 1; display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+                                            <i class="pi pi-user" style="font-size: 1.3rem; margin-right: 10px;"></i>
                                             <p:outputLabel for="responsable" value="Responsable: "/>
-                                            <p:selectOneMenu id="responsable" value="#{aDUusarios.selectedUsuario}" style="margin-left: 10px;">
+                                            <p:selectOneMenu id="responsable" value="#{aDUusarios.selectedUsuario}" style="margin-left: 10px; width: 270px; max-width: 270px;">
                                                 <f:selectItem itemLabel="Selecciona un usuario" itemValue=""/>
                                                 <f:selectItems value="#{aDUusarios.usuariosList}" var="usuario" 
                                                                itemLabel="#{usuario.nombre} #{usuario.apellidoPaterno}" itemValue="#{usuario.IDUsuario}" />
                                             </p:selectOneMenu>
                                         </div>
+                                        <div class="p-col" style="flex: 1; display: flex; align-items: center; justify-content: center; margin-top: 10px;">
+                                            <i class="pi pi-paperclip" style="font-size: 1.3rem; margin-right: 10px;"></i>
+                                            <p:outputLabel for="asunto" value="Asunto:" />
 
-                                        <p:outputLabel for="asunto" value="Asunto:" />
-                                        <div class="p-col" style="flex: 1; display: flex; align-items: start; margin-top: 5px;">
-                                            <p:inputTextarea id="asunto" rows="6" cols="33" />
+                                        </div>
+                                        <div class="p-col" style="flex: 1; display: flex; align-items: start; margin-top: 0px;">
+                                            <p:inputTextarea id="asunto" rows="6" cols="33" style="width: 410px;" />
                                         </div>
                                     </div>
 
