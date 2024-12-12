@@ -62,7 +62,11 @@
 
                                         <div class="p-col" style="flex: 1; display: flex; align-items: start;">
                                             <p:outputLabel for="basic" value="Fecha: " />
-                                            <p:datePicker id="basic" value="#{calendarView.date}" style="margin-left: 10px;" />
+                                            <p:datePicker 
+                                                id="basic" 
+                                                value="#{calendarView.date}" 
+                                                style="margin-left: 10px;" 
+                                                pattern="dd-MM-yyyy" />
                                         </div>
 
                                         <div class="p-col" style="flex: 1; display: flex; align-items: start; margin-top: 10px;">
@@ -74,8 +78,8 @@
                                         <div class="p-col" style="flex: 1; display: flex; align-items: start; margin-top: 10px;">
                                             <p:outputLabel for="line" value="Plataforma:" />
                                             <p:selectOneRadio id="line" value="#{radioView.line}" layout="lineDirection" style="margin-left: 10px;">
-                                                <f:selectItem itemLabel="SIMCA" itemValue="SIMCA"/>
-                                                <f:selectItem itemLabel="SEID" itemValue="SEID"/>
+                                                <f:selectItem itemLabel="SIMCA" itemValue="1"/>
+                                                <f:selectItem itemLabel="SEID" itemValue="2"/>
                                             </p:selectOneRadio>
                                         </div>
 
@@ -100,11 +104,10 @@
 
                                         <div class="p-col" style="flex: 1; display: flex; align-items: start; margin-top: 10px;">
                                             <p:outputLabel for="responsable" value="Responsable: "/>
-                                            <p:selectOneMenu id="responsable" value="#{selectOneMenuView.selectedResponsable}" style="margin-left: 10px;">
+                                            <p:selectOneMenu id="responsable" value="#{aDUusarios.selectedUsuario}" style="margin-left: 10px;">
                                                 <f:selectItem itemLabel="Selecciona un usuario" itemValue=""/>
-                                                <f:selectItem itemLabel="Option1" itemValue="Option1"/>
-                                                <f:selectItem itemLabel="Option2" itemValue="Option2"/>
-                                                <f:selectItem itemLabel="Option3" itemValue="Option3"/>
+                                                <f:selectItems value="#{aDUusarios.usuariosList}" var="usuario" 
+                                                               itemLabel="#{usuario.nombre} #{usuario.apellidoPaterno}" itemValue="#{usuario.IDUsuario}" />
                                             </p:selectOneMenu>
                                         </div>
 

@@ -33,14 +33,6 @@ public class ADMunicipios implements Serializable {
     @PostConstruct
     public void init() {
         municipiosList = mdMunicipios.obtenerMunicipios();
-        if (municipiosList != null) {
-            System.out.println("Municipios cargados: " + municipiosList.size());
-            for (Municipios municipio : municipiosList) {
-                System.out.println("Municipio: ID = " + municipio.getIDMunicipio() + ", Nombre = " + municipio.getNombre());
-            }
-        } else {
-            System.out.println("La lista de municipios es nula.");
-        }
     }
 
     // Getters y setters

@@ -4,9 +4,11 @@
  */
 package accesoDatos;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import modeloDatos.Usuarios;
 
 /**
@@ -28,4 +30,15 @@ public class UsuariosFacade extends AbstractFacade<Usuarios> {
         super(Usuarios.class);
     }
     
+    public List<Usuarios> obtenerTodosLosUsuarios() {
+        List<Usuarios> municipios = null;
+        try {
+            Query query = em.createNamedQuery("Usuarios.findAll");
+            municipios = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace(); // Log del error para depuración
+            return null;
+        }
+        return municipios;
+    }
 }
