@@ -77,11 +77,12 @@
 
                                         <div class="p-col" style="flex: 1; display: flex; align-items: start; margin-top: 10px;">
                                             <p:outputLabel for="line" value="Plataforma:" />
-                                            <p:selectOneRadio id="line" value="#{radioView.line}" layout="lineDirection" style="margin-left: 10px;">
-                                                <f:selectItem itemLabel="SIMCA" itemValue="1"/>
-                                                <f:selectItem itemLabel="SEID" itemValue="2"/>
+                                            <p:selectOneRadio id="line" value="#{aDPlataformas.selectedPlataforma}" layout="lineDirection" style="margin-left: 10px;">
+                                                <f:selectItems value="#{aDPlataformas.plataformasList}" var="plataforma" 
+                                                               itemLabel="#{plataforma.nombre}" itemValue="#{plataforma.IDPlataforma}" />
                                             </p:selectOneRadio>
                                         </div>
+
 
                                         <div class="p-col" style="flex: 1; display: flex; align-items: start; margin-top: 10px;">
                                             <p:outputLabel for="municipio" value="Municipio: "/>

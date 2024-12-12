@@ -24,18 +24,17 @@ public class ADMunicipios implements Serializable {
     /**
      * Creates a new instance of ADMunicipios
      */
-    private List<Municipios> municipiosList; // Lista de municipios para el select
-    private Integer selectedMunicipio; // ID del municipio seleccionado
+    private List<Municipios> municipiosList; 
+    private Integer selectedMunicipio; 
 
     @Inject
-    private MDMunicipios mdMunicipios; // Inyección del Session Bean
+    private MDMunicipios mdMunicipios; 
 
     @PostConstruct
     public void init() {
         municipiosList = mdMunicipios.obtenerMunicipios();
     }
 
-    // Getters y setters
     public List<Municipios> getMunicipiosList() {
         return municipiosList;
     }
