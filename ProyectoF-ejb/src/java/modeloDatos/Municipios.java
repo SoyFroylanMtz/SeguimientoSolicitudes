@@ -25,10 +25,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "municipios")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Municipios.findAll", query = "SELECT m FROM Municipios m"),
+    @NamedQuery(name = "Municipios.findAll", query = "SELECT m FROM Municipios m ORDER BY m.num ASC"),
     @NamedQuery(name = "Municipios.findByIDMunicipio", query = "SELECT m FROM Municipios m WHERE m.iDMunicipio = :iDMunicipio"),
     @NamedQuery(name = "Municipios.findByNum", query = "SELECT m FROM Municipios m WHERE m.num = :num"),
-    @NamedQuery(name = "Municipios.findByNombre", query = "SELECT m FROM Municipios m WHERE m.nombre = :nombre")})
+    @NamedQuery(name = "Municipios.findByNombre", query = "SELECT m FROM Municipios m WHERE m.nombre = :nombre"),
+})
 public class Municipios implements Serializable {
 
     private static final long serialVersionUID = 1L;

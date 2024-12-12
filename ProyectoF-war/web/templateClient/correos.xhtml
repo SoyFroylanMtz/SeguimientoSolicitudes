@@ -81,11 +81,10 @@
 
                                         <div class="p-col" style="flex: 1; display: flex; align-items: start; margin-top: 10px;">
                                             <p:outputLabel for="municipio" value="Municipio: "/>
-                                            <p:selectOneMenu id="municipio" value="#{selectOneMenuView.selectedMunicipio}" style="margin-left: 10px;">
-                                                <f:selectItem itemLabel="Selecciona un Municipio" itemValue=""/>
-                                                <f:selectItem itemLabel="Option1" itemValue="Option1"/>
-                                                <f:selectItem itemLabel="Option2" itemValue="Option2"/>
-                                                <f:selectItem itemLabel="Option3" itemValue="Option3"/>
+                                            <p:selectOneMenu id="municipio" value="#{aDMunicipios.selectedMunicipio}" style="margin-left: 10px;">
+                                                <f:selectItem itemLabel="Selecciona un Municipio" itemValue="" />
+                                                <f:selectItems value="#{aDMunicipios.municipiosList}" var="municipio" 
+                                                               itemLabel="#{municipio.num} - #{municipio.nombre}" itemValue="#{municipio.IDMunicipio}" />
                                             </p:selectOneMenu>
                                         </div>
 
