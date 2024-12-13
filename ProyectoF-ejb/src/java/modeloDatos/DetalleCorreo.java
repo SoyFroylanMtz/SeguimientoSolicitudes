@@ -15,7 +15,6 @@ import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -38,42 +37,26 @@ public class DetalleCorreo implements Serializable {
     @Basic(optional = false)
     @Column(name = "IDDetalleCorreo")
     private Integer iDDetalleCorreo;
-    @Basic(optional = false)
-    @NotNull
     @Lob
-    @Size(min = 1, max = 65535)
+    @Size(max = 65535)
     @Column(name = "asunto")
     private String asunto;
-    @Basic(optional = false)
-    @NotNull
     @Lob
-    @Size(min = 1, max = 65535)
+    @Size(max = 65535)
     @Column(name = "respuesta")
     private String respuesta;
-    @Basic(optional = false)
-    @NotNull
     @Lob
-    @Size(min = 1, max = 65535)
+    @Size(max = 65535)
     @Column(name = "observacion")
     private String observacion;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "externoID")
-    private int externoID;
+    private Integer externoID;
 
     public DetalleCorreo() {
     }
 
     public DetalleCorreo(Integer iDDetalleCorreo) {
         this.iDDetalleCorreo = iDDetalleCorreo;
-    }
-
-    public DetalleCorreo(Integer iDDetalleCorreo, String asunto, String respuesta, String observacion, int externoID) {
-        this.iDDetalleCorreo = iDDetalleCorreo;
-        this.asunto = asunto;
-        this.respuesta = respuesta;
-        this.observacion = observacion;
-        this.externoID = externoID;
     }
 
     public Integer getIDDetalleCorreo() {
@@ -108,11 +91,11 @@ public class DetalleCorreo implements Serializable {
         this.observacion = observacion;
     }
 
-    public int getExternoID() {
+    public Integer getExternoID() {
         return externoID;
     }
 
-    public void setExternoID(int externoID) {
+    public void setExternoID(Integer externoID) {
         this.externoID = externoID;
     }
 

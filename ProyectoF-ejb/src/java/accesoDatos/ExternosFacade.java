@@ -27,5 +27,9 @@ public class ExternosFacade extends AbstractFacade<Externos> {
     public ExternosFacade() {
         super(Externos.class);
     }
+    public void create(Externos externos) {
+        em.persist(externos);
+        em.flush();    
+    }
     
 }

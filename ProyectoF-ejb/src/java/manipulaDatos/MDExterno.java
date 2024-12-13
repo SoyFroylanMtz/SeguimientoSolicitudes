@@ -21,7 +21,7 @@ public class MDExterno {
     @Inject
     private ExternosFacade externosFacade;
     
-    public void crearExterno(int municipioID, int plataformaID, Integer ticketID,int correoID) {
+    public int crearExterno(int municipioID, int plataformaID, Integer ticketID,int correoID) {
         try {
             Externos externo = new Externos();
             externo.setMunicipioID(municipioID);
@@ -31,6 +31,7 @@ public class MDExterno {
             externo.setCorreoID(correoID);
 
             externosFacade.create(externo);
+            return externo.getIDExterno();
         } catch (Exception e) {
             throw e;
         }

@@ -26,6 +26,8 @@ public class ADExternos implements Serializable {
     private ADPlataformas aDPlataformas;
     @Inject
     private ADCorreos aDCorreos;
+    @Inject
+    private ADDetalleCorreo aDetalleCorreo;
     
     private Integer selectedMunicipio;
     private Integer selectedPlataforma;
@@ -38,7 +40,8 @@ public class ADExternos implements Serializable {
         selectedPlataforma = aDPlataformas.getSelectedPlataforma();
         selectedCorreo = aDCorreos.getSelectedCorreo();
         
-        mDExterno.crearExterno(selectedMunicipio, selectedPlataforma, selectedTicket, selectedCorreo);
+        int externoID = mDExterno.crearExterno(selectedMunicipio, selectedPlataforma, selectedTicket, selectedCorreo);
+        aDetalleCorreo.guardarDetalleCorreo(externoID);
     }
 
     public ADExternos() {

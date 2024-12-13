@@ -29,8 +29,8 @@ public class TicketsFacade extends AbstractFacade<Tickets> {
     }
 
     public void create(Tickets ticket) {
-        em.persist(ticket);  // Persiste el ticket
-        em.flush();          // Sincroniza la transacción para obtener el ID generado
+        em.persist(ticket); 
+        em.flush();         
     }
 
 }
