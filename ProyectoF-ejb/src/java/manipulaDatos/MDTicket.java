@@ -23,7 +23,7 @@ public class MDTicket {
     @Inject
     private TicketsFacade ticketsFacade;
 
-    public void crearTicketParcial(Date fechaEmitida, Date horaEmitida, Integer userID) {
+    public int crearTicketParcial(Date fechaEmitida, Date horaEmitida, Integer userID) {
 
         Tickets ticket = new Tickets();
         ticket.setFechaEmitida(fechaEmitida);
@@ -40,6 +40,7 @@ public class MDTicket {
         }
 
         ticketsFacade.create(ticket);
+        return ticket.getIDTicket();
     }
 
     // Add business logic below. (Right-click in editor and choose

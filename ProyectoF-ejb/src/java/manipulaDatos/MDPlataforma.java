@@ -20,10 +20,9 @@ import modeloDatos.Plataformas;
 public class MDPlataforma {
 
     @Inject
-    private PlataformasFacade plataformasFacade; // Inyección de dependencia usando CDI
+    private PlataformasFacade plataformasFacade;
 
     public List<Plataformas> obtenerPlataformas() {
-        // Lógica de negocio adicional, si es necesario
         return plataformasFacade.obtenerTodaLasPlataformas();
     }
     

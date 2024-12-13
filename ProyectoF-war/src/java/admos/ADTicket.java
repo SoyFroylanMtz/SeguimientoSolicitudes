@@ -24,6 +24,8 @@ public class ADTicket implements Serializable {
     private MDTicket mDTicket;
     @Inject
     private ADUusarios aDUusarios;
+    @Inject
+    private ADExternos aDExternos;
 
     private Date fechaEmitida;
     private Date horaEmitida;
@@ -33,15 +35,9 @@ public class ADTicket implements Serializable {
     public void guardarTicketParcial() {
         try {
             selectedUser = aDUusarios.getSelectedUsuario();
-
-            // Validar solo los campos obligatorios
-            if (fechaEmitida == null || horaEmitida == null) {
-                mensaje = "Error: Fecha y hora emitidas son obligatorias.";
-                return;
-            }
-
-            // Llamar a crearTicketParcial con el userID opcional
-            mDTicket.crearTicketParcial(fechaEmitida, horaEmitida, selectedUser != 0 ? selectedUser : null);
+            
+            int ticketID = mDTicket.crearTicketParcial(fechaEmitida, horaEmitida, selectedUser != 0 ? selectedUser : null);
+            aDExternos.guardarExterno(ticketID);
 
             mensaje = "El ticket se creó correctamente con los datos proporcionados.";
         } catch (Exception e) {
@@ -49,7 +45,6 @@ public class ADTicket implements Serializable {
         }
     }
 
-    // Getters y Setters
     public Date getFechaEmitida() {
         return fechaEmitida;
     }

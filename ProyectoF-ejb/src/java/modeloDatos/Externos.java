@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -30,7 +29,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Externos.findByIDExterno", query = "SELECT e FROM Externos e WHERE e.iDExterno = :iDExterno"),
     @NamedQuery(name = "Externos.findByFolioExterno", query = "SELECT e FROM Externos e WHERE e.folioExterno = :folioExterno"),
     @NamedQuery(name = "Externos.findByMunicipioID", query = "SELECT e FROM Externos e WHERE e.municipioID = :municipioID"),
-    @NamedQuery(name = "Externos.findByCargoID", query = "SELECT e FROM Externos e WHERE e.cargoID = :cargoID"),
     @NamedQuery(name = "Externos.findByPlataformaID", query = "SELECT e FROM Externos e WHERE e.plataformaID = :plataformaID"),
     @NamedQuery(name = "Externos.findByTipoAtencionID", query = "SELECT e FROM Externos e WHERE e.tipoAtencionID = :tipoAtencionID"),
     @NamedQuery(name = "Externos.findByTicketID", query = "SELECT e FROM Externos e WHERE e.ticketID = :ticketID"),
@@ -43,46 +41,25 @@ public class Externos implements Serializable {
     @Basic(optional = false)
     @Column(name = "IDExterno")
     private Integer iDExterno;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
+    @Size(max = 30)
     @Column(name = "folioExterno")
     private String folioExterno;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "municipioID")
-    private int municipioID;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "cargoID")
-    private int cargoID;
+    private Integer municipioID;
     @Column(name = "plataformaID")
     private Integer plataformaID;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "tipoAtencionID")
-    private int tipoAtencionID;
+    private Integer tipoAtencionID;
     @Column(name = "ticketID")
     private Integer ticketID;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "correoID")
-    private int correoID;
+    private Integer correoID;
 
     public Externos() {
     }
 
     public Externos(Integer iDExterno) {
         this.iDExterno = iDExterno;
-    }
-
-    public Externos(Integer iDExterno, String folioExterno, int municipioID, int cargoID, int tipoAtencionID, int correoID) {
-        this.iDExterno = iDExterno;
-        this.folioExterno = folioExterno;
-        this.municipioID = municipioID;
-        this.cargoID = cargoID;
-        this.tipoAtencionID = tipoAtencionID;
-        this.correoID = correoID;
     }
 
     public Integer getIDExterno() {
@@ -101,20 +78,12 @@ public class Externos implements Serializable {
         this.folioExterno = folioExterno;
     }
 
-    public int getMunicipioID() {
+    public Integer getMunicipioID() {
         return municipioID;
     }
 
-    public void setMunicipioID(int municipioID) {
+    public void setMunicipioID(Integer municipioID) {
         this.municipioID = municipioID;
-    }
-
-    public int getCargoID() {
-        return cargoID;
-    }
-
-    public void setCargoID(int cargoID) {
-        this.cargoID = cargoID;
     }
 
     public Integer getPlataformaID() {
@@ -125,11 +94,11 @@ public class Externos implements Serializable {
         this.plataformaID = plataformaID;
     }
 
-    public int getTipoAtencionID() {
+    public Integer getTipoAtencionID() {
         return tipoAtencionID;
     }
 
-    public void setTipoAtencionID(int tipoAtencionID) {
+    public void setTipoAtencionID(Integer tipoAtencionID) {
         this.tipoAtencionID = tipoAtencionID;
     }
 
@@ -141,11 +110,11 @@ public class Externos implements Serializable {
         this.ticketID = ticketID;
     }
 
-    public int getCorreoID() {
+    public Integer getCorreoID() {
         return correoID;
     }
 
-    public void setCorreoID(int correoID) {
+    public void setCorreoID(Integer correoID) {
         this.correoID = correoID;
     }
 
