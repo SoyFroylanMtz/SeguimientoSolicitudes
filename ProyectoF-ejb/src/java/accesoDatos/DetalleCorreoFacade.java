@@ -27,5 +27,15 @@ public class DetalleCorreoFacade extends AbstractFacade<DetalleCorreo> {
     public DetalleCorreoFacade() {
         super(DetalleCorreo.class);
     }
-    
+
+    public DetalleCorreo findByExternoID(Integer externoID) {
+        try {
+            return em.createNamedQuery("DetalleCorreo.findByExternoID", DetalleCorreo.class)
+                    .setParameter("externoID", externoID)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null; // O maneja el error como prefieras
+        }
+    }
+
 }

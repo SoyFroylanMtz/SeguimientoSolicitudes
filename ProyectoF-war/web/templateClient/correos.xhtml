@@ -166,64 +166,108 @@
                         </p:outputPanel>
                     </p:dialog>
 
+                    <!-- Contenedor Principal para los Cuatro Carruseles -->
+                    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 1em;">
 
-                </div>
-
-                <div class="card">
-                    <h5 class="first">Header Row</h5>
-                    <h:form>
-                        <p:dataTable var="customer" value="#{dtRowGroupView.customers}" sortBy="#{customer.representative.name}">
-                            <p:headerRow field="representative.name"
-                                         expandable="true"
-                                         expanded="#{customer.representative.name != 'Stephen Shaw'}">
-
-                                <p:column colspan="6">
-                                    <div class="inline-flex align-items-center" style="vertical-align: middle">
-                                        <p:graphicImage name="images/avatar/#{customer.representative.image}" library="demo" width="32" style="vertical-align: middle"/>
-                                        <h:outputText styleClass="ml-2" value="#{customer.representative.name}"/>
+                        <!-- Primer Carrusel -->
+                        <h:form id="carouselForm1">
+                            <div class="card" style="padding: 10px; width: 230px; flex-shrink: 0;">
+                                <p:carousel value="#{aDDetalleCorreo.listaDetalles}" var="detalle" orientation="vertical"
+                                            verticalViewPortHeight="400px" style="width: 230px; margin-bottom: 0;"
+                                            numVisible="2" numScroll="2" styleClass="custom-carousel">
+                                    <f:facet name="header">
+                                        <h5 style="text-align: center; font-size: 1.1em; margin-bottom: 5px;">Sin Asignar</h5>
+                                    </f:facet>
+                                    <div class="product-item" style="padding: 5px; margin-bottom: 1px;">
+                                        <div class="product-item-content" 
+                                             style="padding: 8px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px;
+                                             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); text-align: center; font-size: 0.9em;">
+                                            <h4 style="font-size: 1em; color: #333; margin-bottom: 5px; font-weight: bold;">Asunto: #{detalle.asunto}</h4>
+                                            <p style="font-size: 0.9em; color: #555;">Municipio ID: #{aDDetalleCorreo.externoByID(detalle.externoID).municipioID}</p>
+                                            <p style="font-size: 0.9em; color: #555;">Plataforma ID: #{aDDetalleCorreo.externoByID(detalle.externoID).plataformaID}</p>
+                                        </div>
                                     </div>
-                                </p:column>
-                            </p:headerRow>
+                                </p:carousel>
+                            </div>
+                        </h:form>
 
-                            <p:column headerText="Representative">
-                                <h:outputText value="#{customer.representative.name}" />
-                            </p:column>
+                        <!-- Segundo Carrusel -->
+                        <h:form id="carouselForm2">
+                            <div class="card" style="padding: 10px; width: 230px; flex-shrink: 0;">
+                                <p:carousel value="#{aDDetalleCorreo.listaDetalles}" var="detalle" orientation="vertical"
+                                            verticalViewPortHeight="400px" style="width: 230px; margin-bottom: 0;"
+                                            numVisible="2" numScroll="2" styleClass="custom-carousel">
+                                    <f:facet name="header">
+                                        <h5 style="text-align: center; font-size: 1.1em; margin-bottom: 5px;">En Proceso</h5>
+                                    </f:facet>
+                                    <div class="product-item" style="padding: 5px; margin-bottom: 1px;">
+                                        <div class="product-item-content" 
+                                             style="padding: 8px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px;
+                                             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); text-align: center; font-size: 0.9em;">
+                                            <h4 style="font-size: 1em; color: #333; margin-bottom: 5px; font-weight: bold;">Asunto: #{detalle.asunto}</h4>
+                                            <p style="font-size: 0.9em; color: #555;">Municipio ID: #{aDDetalleCorreo.externoByID(detalle.externoID).municipioID}</p>
+                                            <p style="font-size: 0.9em; color: #555;">Plataforma ID: #{aDDetalleCorreo.externoByID(detalle.externoID).plataformaID}</p>
+                                        </div>
+                                    </div>
+                                </p:carousel>
+                            </div>
+                        </h:form>
 
-                            <p:column headerText="Name">
-                                <h:outputText value="#{customer.name}" />
-                            </p:column>
+                        <!-- Tercer Carrusel -->
+                        <h:form id="carouselForm3">
+                            <div class="card" style="padding: 10px; width: 230px; flex-shrink: 0;">
+                                <p:carousel value="#{aDDetalleCorreo.listaDetalles}" var="detalle" orientation="vertical"
+                                            verticalViewPortHeight="400px" style="width: 230px; margin-bottom: 0;"
+                                            numVisible="2" numScroll="2" styleClass="custom-carousel">
+                                    <f:facet name="header">
+                                        <h5 style="text-align: center; font-size: 1.1em; margin-bottom: 5px;">Por Autorizar</h5>
+                                    </f:facet>
+                                    <div class="product-item" style="padding: 5px; margin-bottom: 1px;">
+                                        <div class="product-item-content" 
+                                             style="padding: 8px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px;
+                                             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); text-align: center; font-size: 0.9em;">
+                                            <h4 style="font-size: 1em; color: #333; margin-bottom: 5px; font-weight: bold;">Asunto: #{detalle.asunto}</h4>
+                                            <p style="font-size: 0.9em; color: #555;">Municipio ID: #{aDDetalleCorreo.externoByID(detalle.externoID).municipioID}</p>
+                                            <p style="font-size: 0.9em; color: #555;">Plataforma ID: #{aDDetalleCorreo.externoByID(detalle.externoID).plataformaID}</p>
+                                        </div>
+                                    </div>
+                                </p:carousel>
+                            </div>
+                        </h:form>
 
-                            <p:column headerText="Country">
-                                <span class="flag flag-#{customer.country.code}" style="width: 30px; height: 20px"/>
-                                <h:outputText style="vertical-align: middle; margin-left: .5rem" value="#{customer.country}"/>
-                            </p:column>
+                        <!-- Cuarto Carrusel -->
+                        <h:form id="carouselForm4">
+                            <div class="card" style="padding: 10px; width: 230px; flex-shrink: 0;">
+                                <p:carousel value="#{aDDetalleCorreo.listaDetalles}" var="detalle" orientation="vertical"
+                                            verticalViewPortHeight="400px" style="width: 230px; margin-bottom: 0;"
+                                            numVisible="2" numScroll="2" styleClass="custom-carousel">
+                                    <f:facet name="header">
+                                        <h5 style="text-align: center; font-size: 1.1em; margin-bottom: 5px;">Completados</h5>
+                                    </f:facet>
+                                    <div class="product-item" style="padding: 5px; margin-bottom: 1px;">
+                                        <div class="product-item-content" 
+                                             style="padding: 8px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px;
+                                             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); text-align: center; font-size: 0.9em;">
+                                            <h4 style="font-size: 1em; color: #333; margin-bottom: 5px; font-weight: bold;">Asunto: #{detalle.asunto}</h4>
+                                            <p style="font-size: 0.9em; color: #555;">Municipio ID: #{aDDetalleCorreo.externoByID(detalle.externoID).municipioID}</p>
+                                            <p style="font-size: 0.9em; color: #555;">Plataforma ID: #{aDDetalleCorreo.externoByID(detalle.externoID).plataformaID}</p>
+                                        </div>
+                                    </div>
+                                </p:carousel>
+                            </div>
+                        </h:form>
 
-                            <p:column headerText="Company">
-                                <h:outputText value="#{customer.company}" />
-                            </p:column>
+                    </div>
 
-                            <p:column headerText="Status">
-                                <span class="customer-badge status-#{customer.status.name().toLowerCase()}">#{customer.status}</span>
-                            </p:column>
+                    <!-- Estilo para ocultar la paginación -->
+                    <style>
+                        .custom-carousel .ui-carousel-indicators {
+                            display: none !important;
+                        }
+                    </style>
 
-                            <p:column headerText="Date">
-                                <h:outputText value="#{customer.date}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy" type="localDate"/>
-                                </h:outputText>
-                            </p:column>
 
-                            <p:summaryRow>
-                                <p:column colspan="5" style="text-align:right">
-                                    <h:outputText value="Total Customers:"/>
-                                </p:column>
-                                <p:column>
-                                    <h:outputText value="#{dtRowGroupView.getTotalCount(customer.representative.name)}"/>
-                                </p:column>
-                            </p:summaryRow>
-                        </p:dataTable>
-                    </h:form>
                 </div>
-
             </ui:define>
 
         </ui:composition>
