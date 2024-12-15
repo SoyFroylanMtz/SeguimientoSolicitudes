@@ -6,6 +6,7 @@ package manipulaDatos;
 
 import accesoDatos.TicketsFacade;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
@@ -41,6 +42,14 @@ public class MDTicket {
 
         ticketsFacade.create(ticket);
         return ticket.getIDTicket();
+    }
+
+    public List<Tickets> obtenerTodosLosTickets() {
+        return ticketsFacade.findAll();
+    }
+
+    public Tickets obtenerTicketPorID(Integer ticketID) {
+        return ticketsFacade.find(ticketID); // Método genérico en el Facade
     }
 
     // Add business logic below. (Right-click in editor and choose

@@ -16,8 +16,10 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import manipulaDatos.MDDetalleCorreo;
+import manipulaDatos.MDTicket;
 import modeloDatos.DetalleCorreo;
 import modeloDatos.Externos;
+import modeloDatos.Tickets;
 
 /**
  *
@@ -31,9 +33,12 @@ public class ADDetalleCorreo implements Serializable {
     private MDDetalleCorreo mDDetalleCorreo;
     @Inject
     private ExternosFacade externosFacade;
+    @Inject
+    private MDTicket mDTicket;
 
     private List<DetalleCorreo> listaDetalles;
     private Map<Integer, Externos> mapaExternos;
+    private Map<Integer, Tickets> mapaTicketsRelacionados;
 
     private String asunto;
 
@@ -57,17 +62,42 @@ public class ADDetalleCorreo implements Serializable {
     }
 
     public void cargarDetalles() {
+        // Inicializar listas y mapas
         listaDetalles = mDDetalleCorreo.obtenerTodosLosDetalles(); // Obtener todos los detalles
         mapaExternos = new HashMap<>();
+        mapaTicketsRelacionados = new HashMap<>();
 
+        // Iterar sobre cada detalle
         for (DetalleCorreo detalle : listaDetalles) {
-            Externos externo = externosFacade.find(detalle.getExternoID());
-            if (externo != null) {
-                mapaExternos.put(detalle.getExternoID(), externo); // Asociar Externo con su ID
+            if (detalle != null && detalle.getExternoID() != null) {
+                // Obtener el externo relacionado
+                Externos externo = externosFacade.find(detalle.getExternoID());
+                if (externo != null) {
+                    mapaExternos.put(detalle.getExternoID(), externo); // Asociar el Externo con su ID
+
+                    // Obtener el ticket relacionado al externo (si existe)
+                    if (externo.getTicketID() != null) {
+                        // Evitar cargar el mismo ticket más de una vez
+                        if (!mapaTicketsRelacionados.containsKey(externo.getTicketID())) {
+                            Tickets ticket = mDTicket.obtenerTicketPorID(externo.getTicketID());
+                            if (ticket != null) {
+                                mapaTicketsRelacionados.put(externo.getTicketID(), ticket);
+                            } else {
+                                System.out.println("No se encontró Ticket para ID: " + externo.getTicketID());
+                            }
+                        }
+                    }
+                } else {
+                    System.out.println("No se encontró Externo para ID: " + detalle.getExternoID());
+                }
             } else {
-                System.out.println("No se encontró Externo para ID: " + detalle.getExternoID());
+                System.out.println("El detalle no tiene un Externo asociado.");
             }
         }
+
+        System.out.println("Carga completada. Total detalles: " + listaDetalles.size());
+        System.out.println("Total externos cargados: " + mapaExternos.size());
+        System.out.println("Total tickets cargados: " + mapaTicketsRelacionados.size());
     }
 
     public Externos externoByID(Integer externoID) {
@@ -96,6 +126,18 @@ public class ADDetalleCorreo implements Serializable {
 
     public void setListaDetalles(List<DetalleCorreo> listaDetalles) {
         this.listaDetalles = listaDetalles;
+    }
+
+    public Map<Integer, Tickets> getMapaTicketsRelacionados() {
+        return mapaTicketsRelacionados;
+    }
+
+    public void setMapaTicketsRelacionados(Map<Integer, Tickets> mapaTicketsRelacionados) {
+        this.mapaTicketsRelacionados = mapaTicketsRelacionados;
+    }
+
+    public Tickets ticketByID(Integer ticketID) {
+        return mapaTicketsRelacionados.get(ticketID); // Busca en el mapa
     }
 
     public ADDetalleCorreo() {

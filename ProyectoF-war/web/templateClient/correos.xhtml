@@ -185,6 +185,19 @@
                                             <h4 style="font-size: 1em; color: #333; margin-bottom: 5px; font-weight: bold;">Asunto: #{detalle.asunto}</h4>
                                             <p style="font-size: 0.9em; color: #555;">Municipio ID: #{aDDetalleCorreo.externoByID(detalle.externoID).municipioID}</p>
                                             <p style="font-size: 0.9em; color: #555;">Plataforma ID: #{aDDetalleCorreo.externoByID(detalle.externoID).plataformaID}</p>
+                                            <!-- Ticket Relacionado -->
+                                            <p style="font-size: 0.9em; color: #555;">
+                                                Fecha Recibida: 
+                                                <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).fechaRecibida}">
+                                                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                                                </h:outputText>
+                                            </p>
+                                            <p style="font-size: 0.9em; color: #555;">
+                                                Hora Recibida: 
+                                                <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).horaRecibida}">
+                                                    <f:convertDateTime pattern="HH:mm:ss" />
+                                                </h:outputText>
+                                            </p>
                                         </div>
                                     </div>
                                 </p:carousel>
@@ -207,6 +220,18 @@
                                             <h4 style="font-size: 1em; color: #333; margin-bottom: 5px; font-weight: bold;">Asunto: #{detalle.asunto}</h4>
                                             <p style="font-size: 0.9em; color: #555;">Municipio ID: #{aDDetalleCorreo.externoByID(detalle.externoID).municipioID}</p>
                                             <p style="font-size: 0.9em; color: #555;">Plataforma ID: #{aDDetalleCorreo.externoByID(detalle.externoID).plataformaID}</p>
+                                            <p style="font-size: 0.9em; color: #555;">
+                                                Fecha Recibida: 
+                                                <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).fechaRecibida}">
+                                                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                                                </h:outputText>
+                                            </p>
+                                            <p style="font-size: 0.9em; color: #555;">
+                                                Hora Recibida: 
+                                                <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).horaRecibida}">
+                                                    <f:convertDateTime pattern="HH:mm:ss" />
+                                                </h:outputText>
+                                            </p>
                                         </div>
                                     </div>
                                 </p:carousel>
@@ -229,6 +254,18 @@
                                             <h4 style="font-size: 1em; color: #333; margin-bottom: 5px; font-weight: bold;">Asunto: #{detalle.asunto}</h4>
                                             <p style="font-size: 0.9em; color: #555;">Municipio ID: #{aDDetalleCorreo.externoByID(detalle.externoID).municipioID}</p>
                                             <p style="font-size: 0.9em; color: #555;">Plataforma ID: #{aDDetalleCorreo.externoByID(detalle.externoID).plataformaID}</p>
+                                            <p style="font-size: 0.9em; color: #555;">
+                                                Fecha Recibida: 
+                                                <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).fechaRecibida}">
+                                                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                                                </h:outputText>
+                                            </p>
+                                            <p style="font-size: 0.9em; color: #555;">
+                                                Hora Recibida: 
+                                                <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).horaRecibida}">
+                                                    <f:convertDateTime pattern="HH:mm:ss" />
+                                                </h:outputText>
+                                            </p>
                                         </div>
                                     </div>
                                 </p:carousel>
@@ -251,6 +288,18 @@
                                             <h4 style="font-size: 1em; color: #333; margin-bottom: 5px; font-weight: bold;">Asunto: #{detalle.asunto}</h4>
                                             <p style="font-size: 0.9em; color: #555;">Municipio ID: #{aDDetalleCorreo.externoByID(detalle.externoID).municipioID}</p>
                                             <p style="font-size: 0.9em; color: #555;">Plataforma ID: #{aDDetalleCorreo.externoByID(detalle.externoID).plataformaID}</p>
+                                            <p style="font-size: 0.9em; color: #555;">
+                                                Fecha Recibida: 
+                                                <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).fechaRecibida}">
+                                                    <f:convertDateTime pattern="dd-MM-yyyy" />
+                                                </h:outputText>
+                                            </p>
+                                            <p style="font-size: 0.9em; color: #555;">
+                                                Hora Recibida: 
+                                                <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).horaRecibida}">
+                                                    <f:convertDateTime pattern="HH:mm:ss" />
+                                                </h:outputText>
+                                            </p>
                                         </div>
                                     </div>
                                 </p:carousel>
