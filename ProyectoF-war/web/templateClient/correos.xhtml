@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="primefaces"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
@@ -172,12 +173,13 @@
                         <!-- Primer Carrusel -->
                         <h:form id="carouselForm1">
                             <div class="card" style="padding: 10px; width: 230px; flex-shrink: 0;">
-                                <p:carousel value="#{aDDetalleCorreo.listaDetalles}" var="detalle" orientation="vertical"
+                                <p:carousel value="#{aDDetalleCorreo.listaDetallesProceso1}" var="detalle" orientation="vertical"
                                             verticalViewPortHeight="400px" style="width: 230px; margin-bottom: 0;"
                                             numVisible="2" numScroll="2" styleClass="custom-carousel">
                                     <f:facet name="header">
                                         <h5 style="text-align: center; font-size: 1.1em; margin-bottom: 5px;">Sin Asignar</h5>
                                     </f:facet>
+
                                     <div class="product-item" style="padding: 5px; margin-bottom: 1px;">
                                         <div class="product-item-content" 
                                              style="padding: 8px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px;
@@ -185,7 +187,6 @@
                                             <h4 style="font-size: 1em; color: #333; margin-bottom: 5px; font-weight: bold;">Asunto: #{detalle.asunto}</h4>
                                             <p style="font-size: 0.9em; color: #555;">Municipio ID: #{aDDetalleCorreo.externoByID(detalle.externoID).municipioID}</p>
                                             <p style="font-size: 0.9em; color: #555;">Plataforma ID: #{aDDetalleCorreo.externoByID(detalle.externoID).plataformaID}</p>
-                                            <!-- Ticket Relacionado -->
                                             <p style="font-size: 0.9em; color: #555;">
                                                 Fecha Recibida: 
                                                 <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).fechaRecibida}">
@@ -204,10 +205,12 @@
                             </div>
                         </h:form>
 
+
                         <!-- Segundo Carrusel -->
                         <h:form id="carouselForm2">
                             <div class="card" style="padding: 10px; width: 230px; flex-shrink: 0;">
-                                <p:carousel value="#{aDDetalleCorreo.listaDetalles}" var="detalle" orientation="vertical"
+                                <!-- Cambiamos el value para que use la lista filtrada -->
+                                <p:carousel value="#{aDDetalleCorreo.listaDetallesProceso3}" var="detalle" orientation="vertical"
                                             verticalViewPortHeight="400px" style="width: 230px; margin-bottom: 0;"
                                             numVisible="2" numScroll="2" styleClass="custom-carousel">
                                     <f:facet name="header">
@@ -238,15 +241,16 @@
                             </div>
                         </h:form>
 
-                        <!-- Tercer Carrusel -->
+
                         <h:form id="carouselForm3">
                             <div class="card" style="padding: 10px; width: 230px; flex-shrink: 0;">
-                                <p:carousel value="#{aDDetalleCorreo.listaDetalles}" var="detalle" orientation="vertical"
+                                <p:carousel value="#{aDDetalleCorreo.listaDetallesProceso2}" var="detalle" orientation="vertical"
                                             verticalViewPortHeight="400px" style="width: 230px; margin-bottom: 0;"
                                             numVisible="2" numScroll="2" styleClass="custom-carousel">
                                     <f:facet name="header">
                                         <h5 style="text-align: center; font-size: 1.1em; margin-bottom: 5px;">Por Autorizar</h5>
                                     </f:facet>
+
                                     <div class="product-item" style="padding: 5px; margin-bottom: 1px;">
                                         <div class="product-item-content" 
                                              style="padding: 8px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px;
@@ -272,10 +276,9 @@
                             </div>
                         </h:form>
 
-                        <!-- Cuarto Carrusel -->
                         <h:form id="carouselForm4">
                             <div class="card" style="padding: 10px; width: 230px; flex-shrink: 0;">
-                                <p:carousel value="#{aDDetalleCorreo.listaDetalles}" var="detalle" orientation="vertical"
+                                <p:carousel value="#{aDDetalleCorreo.listaDetallesProceso4}" var="detalle" orientation="vertical"
                                             verticalViewPortHeight="400px" style="width: 230px; margin-bottom: 0;"
                                             numVisible="2" numScroll="2" styleClass="custom-carousel">
                                     <f:facet name="header">
@@ -305,6 +308,7 @@
                                 </p:carousel>
                             </div>
                         </h:form>
+
 
                     </div>
 

@@ -38,8 +38,12 @@ public class MDTicket {
         if (userID != null && userID > 0) {
             ticket.setFechaAsignada(now);
             ticket.setHorAsignada(now);
+            ticket.setProcesoID(3);
+        }else{
+            ticket.setProcesoID(1);
         }
 
+        ticket.setTipoID(1);
         ticketsFacade.create(ticket);
         return ticket.getIDTicket();
     }

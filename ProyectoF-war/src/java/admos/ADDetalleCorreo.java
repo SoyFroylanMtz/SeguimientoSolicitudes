@@ -100,6 +100,73 @@ public class ADDetalleCorreo implements Serializable {
         System.out.println("Total tickets cargados: " + mapaTicketsRelacionados.size());
     }
 
+    public boolean isProcesoID(DetalleCorreo detalle, int procesoID) {
+        if (detalle != null) {
+            Externos externo = externoByID(detalle.getExternoID());
+            if (externo != null) {
+                Tickets ticket = ticketByID(externo.getTicketID());
+                return ticket != null && ticket.getProcesoID() != null && ticket.getProcesoID() == procesoID;
+            }
+        }
+        return false;
+    }
+
+    public List<DetalleCorreo> getListaDetallesProceso3() {
+        List<DetalleCorreo> listaFiltrada = new ArrayList<>();
+        for (DetalleCorreo detalle : listaDetalles) {
+            Externos externo = externoByID(detalle.getExternoID());
+            if (externo != null && externo.getTicketID() != null) {
+                Tickets ticket = ticketByID(externo.getTicketID());
+                if (ticket != null && ticket.getProcesoID() != null && ticket.getProcesoID() == 3) {
+                    listaFiltrada.add(detalle);
+                }
+            }
+        }
+        return listaFiltrada;
+    }
+
+    public List<DetalleCorreo> getListaDetallesProceso1() {
+        List<DetalleCorreo> listaFiltrada = new ArrayList<>();
+        for (DetalleCorreo detalle : listaDetalles) {
+            Externos externo = externoByID(detalle.getExternoID());
+            if (externo != null && externo.getTicketID() != null) {
+                Tickets ticket = ticketByID(externo.getTicketID());
+                if (ticket != null && ticket.getProcesoID() != null && ticket.getProcesoID() == 1) {
+                    listaFiltrada.add(detalle);
+                }
+            }
+        }
+        return listaFiltrada;
+    }
+
+    public List<DetalleCorreo> getListaDetallesProceso4() {
+        List<DetalleCorreo> listaFiltrada = new ArrayList<>();
+        for (DetalleCorreo detalle : listaDetalles) {
+            Externos externo = externoByID(detalle.getExternoID());
+            if (externo != null && externo.getTicketID() != null) {
+                Tickets ticket = ticketByID(externo.getTicketID());
+                if (ticket != null && ticket.getProcesoID() != null && ticket.getProcesoID() == 4) {
+                    listaFiltrada.add(detalle);
+                }
+            }
+        }
+        return listaFiltrada;
+    }
+
+    public List<DetalleCorreo> getListaDetallesProceso2() {
+        List<DetalleCorreo> listaFiltrada = new ArrayList<>();
+        for (DetalleCorreo detalle : listaDetalles) {
+            Externos externo = externoByID(detalle.getExternoID());
+            if (externo != null && externo.getTicketID() != null) {
+                Tickets ticket = ticketByID(externo.getTicketID());
+                if (ticket != null && ticket.getProcesoID() != null && ticket.getProcesoID() == 2) {
+                    listaFiltrada.add(detalle);
+                }
+            }
+        }
+        return listaFiltrada;
+    }
+
     public Externos externoByID(Integer externoID) {
         return mapaExternos.get(externoID); // Busca en el mapa
     }
