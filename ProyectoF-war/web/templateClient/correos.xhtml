@@ -170,7 +170,6 @@
                     <!-- Contenedor Principal para los Cuatro Carruseles -->
                     <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 1em;">
 
-                        <!-- Primer Carrusel -->
                         <h:form id="carouselForm1">
                             <div class="card" style="padding: 10px; width: 230px; flex-shrink: 0;">
                                 <p:carousel value="#{aDDetalleCorreo.listaDetallesProceso1}" var="detalle" orientation="vertical"
@@ -181,29 +180,170 @@
                                     </f:facet>
 
                                     <div class="product-item" style="padding: 5px; margin-bottom: 1px;">
-                                        <div class="product-item-content" 
-                                             style="padding: 8px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px;
-                                             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); text-align: center; font-size: 0.9em;">
-                                            <h4 style="font-size: 1em; color: #333; margin-bottom: 5px; font-weight: bold;">Asunto: #{detalle.asunto}</h4>
-                                            <p style="font-size: 0.9em; color: #555;">Municipio ID: #{aDDetalleCorreo.externoByID(detalle.externoID).municipioID}</p>
-                                            <p style="font-size: 0.9em; color: #555;">Plataforma ID: #{aDDetalleCorreo.externoByID(detalle.externoID).plataformaID}</p>
-                                            <p style="font-size: 0.9em; color: #555;">
-                                                Fecha Recibida: 
-                                                <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).fechaRecibida}">
-                                                    <f:convertDateTime pattern="dd-MM-yyyy" />
-                                                </h:outputText>
-                                            </p>
-                                            <p style="font-size: 0.9em; color: #555;">
-                                                Hora Recibida: 
-                                                <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).horaRecibida}">
-                                                    <f:convertDateTime pattern="HH:mm:ss" />
-                                                </h:outputText>
-                                            </p>
-                                        </div>
+                                        <!-- Usamos p:commandLink para hacer la tarjeta clicable -->
+                                        <p:commandLink style="display: block; text-decoration: none;" 
+                                                       actionListener="#{aDDetalleCorreo.seleccionarDetalle(detalle)}"
+                                                       update=":detalleDialogForm:detalleDialog" 
+                                                       oncomplete="PF('detalleDialog').show();">
+
+                                            <div class="product-item-content" 
+                                                 style="padding: 8px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px;
+                                                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); text-align: start; font-size: 0.9em;">
+                                                <p style="font-size: 0.9em; color: #555; margin: 8px 0px;">
+                                                    #{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).folioTicket}
+                                                </p>
+                                                <p style="font-size: 0.9em; color: #555; margin: 8px 0;">
+                                                    <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).fechaRecibida}">
+                                                        <f:convertDateTime pattern="dd-MM-yyyy" />
+                                                    </h:outputText>
+                                                </p>
+                                                <p style="font-size: 0.9em; color: #555; margin: 8px 3px;">
+                                                    <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).horaRecibida}">
+                                                        <f:convertDateTime pattern="HH:mm:ss" />
+                                                    </h:outputText>
+                                                </p>
+                                                <p style="font-size: 0.9em; color: #555; margin: 8px 0;">
+                                                    #{aDDetalleCorreo.getNombreCompletoUsuarioByTicketID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID)}
+                                                </p>
+                                                <p style="font-size: 0.9em; color: #555; margin: 8px 0;">
+                                                    #{aDDetalleCorreo.getNumeroMunicipioByExterno(aDDetalleCorreo.externoByID(detalle.externoID))} - 
+                                                    #{aDDetalleCorreo.getNombreMunicipioByExterno(aDDetalleCorreo.externoByID(detalle.externoID))}
+                                                </p>
+                                                <div style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0;">
+                                                    <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).fechaEmitida}" 
+                                                                  style="font-size: 0.9em; color: #555; text-align: start;">
+                                                        <f:convertDateTime pattern="dd-MM-yyyy" />
+                                                    </h:outputText>
+                                                    <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).horaEmitida}" 
+                                                                  style="font-size: 0.9em; color: #555; text-align: end;">
+                                                        <f:convertDateTime pattern="HH:mm:ss" />
+                                                    </h:outputText>
+                                                </div>
+                                                <p style="font-size: 0.9em; color: #555; margin: 8px 0; text-align: center;">
+                                                    #{aDDetalleCorreo.getNombrePlataformaByExterno(aDDetalleCorreo.externoByID(detalle.externoID))}
+                                                </p>
+                                            </div>
+                                        </p:commandLink>
                                     </div>
                                 </p:carousel>
                             </div>
                         </h:form>
+
+                        <!-- Diálogo -->
+                        <h:form id="detalleDialogForm">
+                            <p:dialog id="detalleDialog" header="INFORMACIÓN DEL CORREO"  widgetVar="detalleDialog" modal="true" showEffect="fade"
+                                      hideEffect="fade" resizable="false" focus="none" dynamic="true">
+                                <p:outputPanel id="productDetail" style="text-align:center;">
+                                    <div class="card" style="display: flex; flex-direction: row; gap: 20px; justify-content: center;">
+                                        <!-- Panel Izquierdo: Inputs y Labels -->
+                                        <div style="width: 400px; height: 75vh; display: flex; flex-direction: column; gap: 20px; background-color: white; padding: 10px;">
+                                            <!-- Fecha Emitida -->
+                                            <div style="display: flex; align-items: center; justify-content: start;">
+                                                <i class="pi pi-calendar-plus" style="font-size: 1.3rem; margin-right: 10px;"></i>
+                                                <p:outputLabel for="fecha" value="Fecha: " />
+                                                <p:datePicker id="fecha" value="#{aDDetalleCorreo.selectedTicket != null ? aDDetalleCorreo.selectedTicket.fechaRecibida : 'No disponible'}" style="margin-left: 10px;"
+                                                              pattern="yyyy-MM-dd" showOnFocus="false" showIcon="true" disabled="true">
+                                                </p:datePicker>
+                                            </div>
+
+                                            <!-- Hora Emitida -->
+                                            <div style="display: flex; align-items: center; justify-content: start;">
+                                                <i class="pi pi-clock" style="font-size: 1.3rem; margin-right: 10px;"></i>
+                                                <p:outputLabel for="time" value="Hora: " />
+                                                <p:datePicker id="time" value="#{aDDetalleCorreo.selectedTicket != null ? aDDetalleCorreo.selectedTicket.horaRecibida : 'No disponible'}" timeOnly="true" 
+                                                              pattern="HH:mm:ss" style="margin-left: 17px;" disabled="true"/>
+                                            </div>
+
+                                            <!-- Plataforma -->
+                                            <div style="display: flex; align-items: center; justify-content: start;">
+                                                <i class="pi pi-globe" style="font-size: 1.3rem; margin-right: 10px;"></i>
+                                                <p:outputLabel for="platform" value="Plataforma:" />
+                                                <p:selectOneRadio id="platform" value="#{aDDetalleCorreo.selectedPlataformaID}" layout="lineDirection" 
+                                                                  style="margin-left: 30px; width: 270px;" disabled="true">
+                                                    <f:selectItems value="#{aDPlataformas.plataformasList}" var="plataforma" 
+                                                                   itemLabel="#{plataforma.nombre}" itemValue="#{plataforma.IDPlataforma}" />
+                                                </p:selectOneRadio>
+                                            </div>
+
+                                            <!-- Municipio -->
+                                            <div style="display: flex; align-items: center; justify-content: start;">
+                                                <i class="pi pi-map-marker" style="font-size: 1.3rem; margin-right: 10px;"></i>
+                                                <p:outputLabel for="municipio" value="Municipio: " />
+                                                <p:selectOneMenu id="municipio" value="#{aDDetalleCorreo.selectedMunicipioID}" 
+                                                                 style="margin-left: 33px; width: 240px; max-width: 240px;" disabled="true">
+                                                    <f:selectItem itemLabel="Selecciona un Municipio" itemValue="" />
+                                                    <f:selectItems value="#{aDMunicipios.municipiosList}" var="municipio" 
+                                                                   itemLabel="#{municipio.num} - #{municipio.nombre}" itemValue="#{municipio.IDMunicipio}" />
+                                                </p:selectOneMenu>
+                                            </div>
+
+                                            <!-- Correo -->
+                                            <div style="display: flex; align-items: center; justify-content: start; margin-top: 0px;">
+                                                <i class="pi pi-envelope" style="font-size: 1.3rem; margin-right: 10px;"></i>
+                                                <p:outputLabel for="correo" value="Correo: " />
+                                                <p:selectOneMenu id="correo"  value="#{aDDetalleCorreo.selectedCorreoID}"
+                                                                 style="margin-left: 53px; width: 240px; max-width: 240px;" disabled="true">
+                                                    <f:selectItem itemLabel="Selecciona un correo" itemValue="0" />
+                                                    <f:selectItems value="#{aDCorreos.correosList}" var="correo" 
+                                                                   itemLabel="#{correo.correo}" itemValue="#{correo.IDCorreo}" />
+                                                </p:selectOneMenu>
+                                            </div>
+
+                                            <!-- Responsable -->
+                                            <div style="display: flex; align-items: center; justify-content: start; margin-top: 0px;">
+                                                <i class="pi pi-user" style="font-size: 1.3rem; margin-right: 10px;"></i>
+                                                <p:outputLabel for="responsable" value="Responsable: " />
+                                                <p:selectOneMenu id="responsable" value="#{aDDetalleCorreo.selectedUsuarioID}" 
+                                                                 style="margin-left: 10px; width: 240px; max-width: 240px;" disabled="true">
+                                                    <f:selectItem itemLabel="Selecciona un usuario" itemValue="0" />
+                                                    <f:selectItems value="#{aDUusarios.usuariosList}" var="usuario" 
+                                                                   itemLabel="#{usuario.nombre} #{usuario.apellidoPaterno}" itemValue="#{usuario.IDUsuario}" />
+                                                </p:selectOneMenu>
+                                            </div>
+
+                                            <!-- Asunto -->
+                                            <div style="display: flex; align-items: center; justify-content: start; flex-direction: column; gap: 5px;">
+                                                <div style="display: flex; align-items: center; width: 100%;">
+                                                    <i class="pi pi-paperclip" style="font-size: 1.3rem; margin-right: 10px;"></i>
+                                                    <p:outputLabel for="asunto" value="Asunto:" />
+                                                </div>
+                                                <p:inputTextarea id="asunto" rows="2" cols="33" style="width: 100%; height: auto;" value="#{aDDetalleCorreo.selectedAsunto}" disabled="true"/>
+                                            </div>
+
+
+                                            <div style="display: flex; align-items: center; justify-content: start; flex-direction: column; gap: 5px;">
+                                                <div style="display: flex; align-items: center; width: 100%;">
+                                                    <i class="pi pi-paperclip" style="font-size: 1.3rem; margin-right: 10px;"></i>
+                                                    <p:outputLabel for="respuesta" value="Respuesta:" />
+                                                </div>
+                                                <p:inputTextarea id="respuesta" rows="2" cols="33" style="width: 100%;" value="#{aDDetalleCorreo.selectedAsunto}"/>
+                                            </div>
+                                        </div>
+
+                                        <!-- Panel Derecho: Subida de Archivo -->
+                                        <div style="width: 500px; display: flex; flex-direction: column; gap: 10px;">
+                                            <!-- Subir archivo -->
+                                            <div style="display: flex; align-items: center; justify-content: flex-start; gap: 5px;">
+                                                <p:fileUpload value="#{aDDocument.file}" mode="simple" skinSimple="true" label="Añadir"/>
+                                                <p:commandButton value="Ver" ajax="true" action="#{aDDocument.upload}" 
+                                                                 update="uploadedFilePanel" styleClass="mt-3 ui-button-outlined block" />
+                                            </div>
+
+                                            <!-- Panel para mostrar el archivo subido -->
+                                            <h:panelGroup id="uploadedFilePanel" layout="block" style="margin-top: 10px;">
+                                                <iframe src="#{aDDocument.currentUrl}" width="450px" height="400px" frameborder="0">
+                                                    Your browser can't display the PDF.
+                                                    <h:outputLink value="#{aDDocument.currentUrl}" target="_blank">Click here to download the file.</h:outputLink>
+                                                </iframe>
+                                            </h:panelGroup>
+                                        </div>
+                                    </div>
+                                </p:outputPanel>
+
+                            </p:dialog>
+                        </h:form>
+
+
 
 
                         <!-- Segundo Carrusel -->
@@ -217,25 +357,50 @@
                                         <h5 style="text-align: center; font-size: 1.1em; margin-bottom: 5px;">En Proceso</h5>
                                     </f:facet>
                                     <div class="product-item" style="padding: 5px; margin-bottom: 1px;">
-                                        <div class="product-item-content" 
-                                             style="padding: 8px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px;
-                                             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); text-align: center; font-size: 0.9em;">
-                                            <h4 style="font-size: 1em; color: #333; margin-bottom: 5px; font-weight: bold;">Asunto: #{detalle.asunto}</h4>
-                                            <p style="font-size: 0.9em; color: #555;">Municipio ID: #{aDDetalleCorreo.externoByID(detalle.externoID).municipioID}</p>
-                                            <p style="font-size: 0.9em; color: #555;">Plataforma ID: #{aDDetalleCorreo.externoByID(detalle.externoID).plataformaID}</p>
-                                            <p style="font-size: 0.9em; color: #555;">
-                                                Fecha Recibida: 
-                                                <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).fechaRecibida}">
-                                                    <f:convertDateTime pattern="dd-MM-yyyy" />
-                                                </h:outputText>
-                                            </p>
-                                            <p style="font-size: 0.9em; color: #555;">
-                                                Hora Recibida: 
-                                                <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).horaRecibida}">
-                                                    <f:convertDateTime pattern="HH:mm:ss" />
-                                                </h:outputText>
-                                            </p>
-                                        </div>
+                                        <!-- Usamos p:commandLink para hacer la tarjeta clicable -->
+                                        <p:commandLink style="display: block; text-decoration: none;" 
+                                                       actionListener="#{aDDetalleCorreo.seleccionarDetalle(detalle)}"
+                                                       update=":detalleDialogForm:detalleDialog" 
+                                                       oncomplete="PF('detalleDialog').show();">
+
+                                            <div class="product-item-content" 
+                                                 style="padding: 8px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px;
+                                                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); text-align: start; font-size: 0.9em;">
+                                                <p style="font-size: 0.9em; color: #555; margin: 8px 0px;">
+                                                    #{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).folioTicket}
+                                                </p>
+                                                <p style="font-size: 0.9em; color: #555; margin: 8px 0;">
+                                                    <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).fechaRecibida}">
+                                                        <f:convertDateTime pattern="dd-MM-yyyy" />
+                                                    </h:outputText>
+                                                </p>
+                                                <p style="font-size: 0.9em; color: #555; margin: 8px 3px;">
+                                                    <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).horaRecibida}">
+                                                        <f:convertDateTime pattern="HH:mm:ss" />
+                                                    </h:outputText>
+                                                </p>
+                                                <p style="font-size: 0.9em; color: #555; margin: 8px 0;">
+                                                    #{aDDetalleCorreo.getNombreCompletoUsuarioByTicketID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID)}
+                                                </p>
+                                                <p style="font-size: 0.9em; color: #555; margin: 8px 0;">
+                                                    #{aDDetalleCorreo.getNumeroMunicipioByExterno(aDDetalleCorreo.externoByID(detalle.externoID))} - 
+                                                    #{aDDetalleCorreo.getNombreMunicipioByExterno(aDDetalleCorreo.externoByID(detalle.externoID))}
+                                                </p>
+                                                <div style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0;">
+                                                    <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).fechaEmitida}" 
+                                                                  style="font-size: 0.9em; color: #555; text-align: start;">
+                                                        <f:convertDateTime pattern="dd-MM-yyyy" />
+                                                    </h:outputText>
+                                                    <h:outputText value="#{aDDetalleCorreo.ticketByID(aDDetalleCorreo.externoByID(detalle.externoID).ticketID).horaEmitida}" 
+                                                                  style="font-size: 0.9em; color: #555; text-align: end;">
+                                                        <f:convertDateTime pattern="HH:mm:ss" />
+                                                    </h:outputText>
+                                                </div>
+                                                <p style="font-size: 0.9em; color: #555; margin: 8px 0; text-align: center;">
+                                                    #{aDDetalleCorreo.getNombrePlataformaByExterno(aDDetalleCorreo.externoByID(detalle.externoID))}
+                                                </p>
+                                            </div>
+                                        </p:commandLink>
                                     </div>
                                 </p:carousel>
                             </div>

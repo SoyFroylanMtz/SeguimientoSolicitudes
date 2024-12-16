@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -41,7 +43,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Tickets.findByHorAsignada", query = "SELECT t FROM Tickets t WHERE t.horAsignada = :horAsignada"),
     @NamedQuery(name = "Tickets.findByUserID", query = "SELECT t FROM Tickets t WHERE t.userID = :userID"),
     @NamedQuery(name = "Tickets.findByProcesoID", query = "SELECT t FROM Tickets t WHERE t.procesoID = :procesoID"),
-    @NamedQuery(name = "Tickets.findByTipoID", query = "SELECT t FROM Tickets t WHERE t.tipoID = :tipoID")})
+    @NamedQuery(name = "Tickets.findByTipoID", query = "SELECT t FROM Tickets t WHERE t.tipoID = :tipoID"),
+    @NamedQuery(name = "Tickets.findByDetalleCorreos", query = "SELECT t FROM Tickets t WHERE t.iDTicket IN (SELECT e.ticketID FROM Externos e WHERE e.iDExterno IN (SELECT d.externoID FROM DetalleCorreo d))")
+
+})
 public class Tickets implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -83,6 +88,9 @@ public class Tickets implements Serializable {
     private Integer procesoID;
     @Column(name = "tipoID")
     private Integer tipoID;
+    @ManyToOne
+    @JoinColumn(name = "userID", referencedColumnName = "IDUsuario", insertable = false, updatable = false)
+    private Usuarios usuario;
 
     public Tickets() {
     }
@@ -194,6 +202,16 @@ public class Tickets implements Serializable {
     public void setTipoID(Integer tipoID) {
         this.tipoID = tipoID;
     }
+
+    public Usuarios getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuarios usuario) {
+        this.usuario = usuario;
+    }
+    
+    
 
     @Override
     public int hashCode() {

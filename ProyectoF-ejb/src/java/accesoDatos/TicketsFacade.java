@@ -4,6 +4,7 @@
  */
 package accesoDatos;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,8 +30,8 @@ public class TicketsFacade extends AbstractFacade<Tickets> {
     }
 
     public void create(Tickets ticket) {
-        em.persist(ticket); 
-        em.flush();         
+        em.persist(ticket);
+        em.flush();
     }
 
 }

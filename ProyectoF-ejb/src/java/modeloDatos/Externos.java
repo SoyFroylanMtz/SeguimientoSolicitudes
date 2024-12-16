@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -54,6 +56,12 @@ public class Externos implements Serializable {
     private Integer ticketID;
     @Column(name = "correoID")
     private Integer correoID;
+    @ManyToOne
+    @JoinColumn(name = "municipioID", referencedColumnName = "IDMunicipio", insertable = false, updatable = false)
+    private Municipios municipio;
+    @ManyToOne
+    @JoinColumn(name = "plataformaID", referencedColumnName = "IDPlataforma", insertable = false, updatable = false)
+    private Plataformas plataforma;
 
     public Externos() {
     }
@@ -118,6 +126,24 @@ public class Externos implements Serializable {
         this.correoID = correoID;
     }
 
+    public Municipios getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(Municipios municipio) {
+        this.municipio = municipio;
+    }
+
+    public Plataformas getPlataforma() {
+        return plataforma;
+    }
+
+    public void setPlataforma(Plataformas plataforma) {
+        this.plataforma = plataforma;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -142,5 +168,5 @@ public class Externos implements Serializable {
     public String toString() {
         return "modeloDatos.Externos[ iDExterno=" + iDExterno + " ]";
     }
-    
+
 }
